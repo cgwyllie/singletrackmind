@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <style>
+            @import url('sp://import/css/api.css');
+            @import url('sp://import/css/eve.css');
+
+            .sp-button, .sp-primary {
+                padding: 3px 3px 3px;
+                line-height: 19px;
+                width: 120px;
+            }
+        </style>
+
+        <script>
+            window.onload = function() {
+                console.log('init');
+
+                var sp = getSpotifyApi(1);
+                var models = sp.require("sp://import/scripts/api/models");
+                var player = models.player;
+
+                var playlist, repeatUri;
+
+                var singleTrackMind = false;
+
+                var currentHTML = document.getElementById('np');
+                var rawkOnButton = document.getElementById('rawkOnButton');
+
+                function initPlaylist() {
+                    if (player.track) {
+                        playlist = new models.Playlist();
+                        repeatUri = player.track.uri;
+                        playlist.add(repeatUri);
+                    }
+                }
+
+                function playWithRepeat() {
+                    player.repeat = true;
+                    player.play(repeatUri, playlist);
+                }
+
+                function updateUI() {
+                    if (!player.track) {
+                        currentHTML.innerHTML = 'No track currently playing';
+                    } else {
+                        currentHTML.innerHTML = 'Now repeating: ' + player.track;
+                    }
+
+                    if (singleTrackMind) {
+                        rawkOnButton.className = "sp-button sp-primary";
+                        rawkOnButton.innerHTML = "Rawkin' Onwards!";
+                    }
+                    else {
+                        rawkOnButton.className = "sp-button";
+                        rawkOnButton.innerHTML = "Rawk Onwards...";
+                    }
+                }
+
+                function rawkOnwards() {
+                    if (singleTrackMind) {
+                        initPlaylist();
+                        playWithRepeat();
+                    }
+                    else {
+                        player.repeat = false;
+                        repeatUri = null;
+                    }
+                    updateUI();
+                }
+
+                player.observe(models.EVENT.CHANGE, function(event) {
+                    if (event.type == "playerStateChanged" && event.data.curtrack) {
+                        if (player.track.uri != repeatUri) {
+                            console.log('user changed track, we need to repeat it');
+                            rawkOnwards();
+                        }
+                        else {
+                            playlist.add(repeatUri);
+                        }
+                    }
+                });
+
+                rawkOnButton.onclick = function () {
+                    console.log('clicked');
+                    singleTrackMind = !singleTrackMind;
+                    rawkOnwards();
+                };
+
+            }
+        </script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>Repeater</h1>
+            <p class="description">:-D</p>
+            <div id="np"></div>
+
+            <button id="rawkOnButton" class="sp-button">Rawk Onwards...</button>
+
+        </div>
+    </body>
+</html>

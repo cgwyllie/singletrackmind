@@ -1,0 +1,17 @@
+{
+	"BundleType": "Application",
+	"BundleIdentifier": "singletrackmind",
+	"AppIcon": {
+		"36x18": "tutorial.png"
+	},
+	"AppName": {
+		"en": "Single Track Mind"
+	},
+	"AppDescription": {
+		"en": "The missing repeat 1 track mode for Spotify..."
+	},
+	"SupportedLanguages": [
+		"en"
+	],
+	"VendorIdentifier": "com.tumblr.cgwyllie"
+}
