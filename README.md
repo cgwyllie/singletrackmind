@@ -10,7 +10,7 @@ At the moment, it's pretty much proof of concept and probably has a few bugs. It
 To use this, follow the steps below:
 
 * Enable our account as a developer account
-* Put the files into: `My Documents\Spotify\singletrackmind` for windows, `~/Spotify/singletrackmind` for Linux/Mac
+* Put the files into: `My Documents\Spotify\singletrackmind` for Windows, `~/Spotify/singletrackmind` for Linux/Mac
 * Open Spotify
 * Type spotify:app:singletrackmind in the search bar & press enter
 * Start rawking on! And on.. and on..... xD
