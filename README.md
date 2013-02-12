@@ -9,7 +9,7 @@ At the moment, it's pretty much proof of concept and probably has a few bugs. It
 # Usage
 To use this, follow the steps below:
 
-* Enable our account as a developer account
+* Enable your account as a developer account
 * Put the files into: `My Documents\Spotify\singletrackmind` for Windows, `~/Spotify/singletrackmind` for Linux/Mac
 * Open Spotify
 * Type spotify:app:singletrackmind in the search bar & press enter
